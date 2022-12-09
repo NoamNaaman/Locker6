@@ -38,6 +38,8 @@ extern bool Tx2Transmitting;
 extern u32 Tx2Length;
 
 
+void delay_us(u32);
+
 //=============================================================================================
 void UART1_receive_char(void)
   {
@@ -171,7 +173,7 @@ u16 get_usart_byte(void)
  * Parameters:   message - a pointer to 8 bit character string to be sent
  * Returns:      NONE
 ===============================================================*/
-void send_char(u32 channel, char chr)
+void send_char(u32 channel, u8 chr)
   {
   switch (channel)
     {
@@ -194,19 +196,11 @@ void send_char(u32 channel, char chr)
  * Parameters:   message - a pointer to 8 bit character string to be sent
  * Returns:      NONE
 ===============================================================*/
-void send_message(u32 channel, char *str)
+void send_message(char *str)
   {
   u32 length;
   length = strlen(str);
-  switch (channel)
-    {
-    case 1:
-      HAL_UART_Transmit(&huart1, (u8 *)str, length, 100);
-      break;
-    case 2:
-      HAL_UART_Transmit(&huart2, (u8 *)str, length, 100);
-      break;
-    }
+  HAL_UART_Transmit(&huart1, (u8 *)str, length, 100);
   }
 
 /*==============================================================

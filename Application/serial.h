@@ -4,7 +4,7 @@
 
 u32 get_comm_buffer_status(u32 channel);
 u16 get_usart_byte(void);
-void send_message(u32 ch, char *message);
+void send_message(char *message);
 void send_RS485_message(char *str);
 void flush_rx_buffer(u32 channel);
 
