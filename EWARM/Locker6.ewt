@@ -1435,6 +1435,9 @@
                 <group>
                     <name>Includes</name>
                     <file>
+                        <name>$PROJ_DIR$\..\Application\Locker_main.c</name>
+                    </file>
+                    <file>
                         <name>$PROJ_DIR$\..\Core\Inc\main.h</name>
                     </file>
                     <file>
@@ -1450,6 +1453,9 @@
                         <name>$PROJ_DIR$\..\Core\Inc\stm32f0xx_it.h</name>
                     </file>
                 </group>
+                <file>
+                    <name>$PROJ_DIR$\..\Application\Locker_comm.c</name>
+                </file>
                 <file>
                     <name>$PROJ_DIR$\..\Application\Locker_intr.c</name>
                 </file>

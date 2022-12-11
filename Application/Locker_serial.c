@@ -220,30 +220,15 @@ void send_block(u32 length, u8 *message)
  * Parameters:   NONE
  * Returns:      character count for specified channel
 ===============================================================*/
-u32 get_comm_buffer_status(u32 channel)
+u32 get_comm_buffer_status(void)
   {
-  switch (channel)
-    {
-    case 1:
-      return Rx1cnt;
-    case 2:
-      return Rx2cnt;
-    }
-  return 0;
+  return Rx1cnt;
   }
 
 //=============================================================================================
-void flush_rx_buffer(u32 channel)
+void flush_rx_buffer(void)
   {
-  switch (channel)
-    {
-    case 1:
-      Rx1cnt = 0; Rx1in = 0; Rx1out = 0; // low level input/output pointers and byte counter
-      break;
-    case 2:
-      Rx2cnt = 0; Rx2in = 0; Rx2out = 0; // low level input/output pointers and byte counter
-     break;
-    }
+  Rx1cnt = 0; Rx1in = 0; Rx1out = 0; // low level input/output pointers and byte counter
   }
 
 //=============================================================================
@@ -264,3 +249,21 @@ void RS485_send_char(u8 chr)
   delay_us(100);
   }
 
+//=============================================================================
+void send_RS485_message(char *str)
+  {
+  u32 length;
+  length = strlen(str);
+  output_high(RS485EN);
+  delay_us(5);
+  RS485_sending = 1;
+  while (length--)
+    {
+    huart1.Instance->TDR = *str++;
+    while (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_TC) == RESET);
+//    delay_us(105);
+    }
+  delay_us(5);
+  output_low(RS485EN);
+  RS485_sending = 0;
+  }

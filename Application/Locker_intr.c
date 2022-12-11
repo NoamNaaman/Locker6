@@ -9,6 +9,8 @@ u32 Timer_10ms_count[4];
 u32 Timer_10mS_Flags;
 u32 Timer_10mS_Cnt;
 u32 Timer_100mS_Flags;
+u32 Timer_100mS_Cnt;
+u32 Timer_1S_Flags;
 u32 comm_timer;
 
 //--------------------------------------------------------------------------
@@ -31,6 +33,11 @@ void UserSysTick_Handler(void) // 1ms
       {
       Timer_10mS_Cnt = 0;
       Timer_100mS_Flags =  0xFFFFFFFF;
+      if (++Timer_100mS_Cnt >= 10)
+        {
+        Timer_100mS_Cnt = 0;
+        Timer_1S_Flags =  0xFFFFFFFF;
+        }
       }
     }
   }

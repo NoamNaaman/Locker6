@@ -2,11 +2,11 @@
 #define __SERIAL
 
 
-u32 get_comm_buffer_status(u32 channel);
+u32 get_comm_buffer_status(void);
 u16 get_usart_byte(void);
 void send_message(char *message);
 void send_RS485_message(char *str);
-void flush_rx_buffer(u32 channel);
+void flush_rx_buffer(void);
 
 #define USART_IN_BUF_LEN 128
 

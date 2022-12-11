@@ -153,10 +153,53 @@ typedef enum
 #define make16(x1,x0) (((u32)x1 << 8) | (u32)x0)
 #define make8(data, byte) ((data >> (byte * 8)) & 0xFF)
 
+#define ClearTflag(w, b) w &= ~(1 << b)
+#define SetTflag(w, b) w |= (1 << b)
+#define GetTflag(w, b) ((w & (1 << b)) != 0)
+
+#define GetTmrFlag(x) GetTflag(x)
+#define ClearTmrFlag(x) ClearTflag(x)
+#define SetTmrFlag(x) SetTflag(x)
+    
 
 void SetPinMode(GPIO_TypeDef* GPIOx, u16 Pin, GPIOModeFunc_TypeDef PortMode);
 
 void NVIC_Configuration(void);
 void SysTickConfig(void);
+
+#define LED1 GPIOA,13
+#define LED2 GPIOA,14
+#define RS485EN GPIOB,1
+#define SOL1 GPIOA,4
+#define SOL2 GPIOA,5
+#define SOL3 GPIOA,6
+#define SOL4 GPIOA,7
+#define SOL5 GPIOA,9
+#define SOL6 GPIOA,10
+
+
+//#define TMR_1MS_
+//#define TMR_1MS_
+//#define TMR_1MS_
+//
+//#define TMR_10MS_
+//#define TMR_10MS_
+//#define TMR_10MS_
+//
+//#define TMR_100MS_
+//#define TMR_100MS_
+//#define TMR_100MS_
+
+#define TMR_1S_OUTPUT_TIMER Timer_1S_Flags,1
+//#define TMR_1S_
+//#define TMR_1S_
+
+extern u32 Timer_5mS_Flags;
+extern u32 Timer_1mS_Flags;
+extern u32 Timer_10mS_Flags;
+extern u32 Timer_100mS_Flags;
+extern u32 Timer_1S_Flags;
+
+
 
 #endif
